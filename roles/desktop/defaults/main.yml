@@ -2,3 +2,5 @@ leftwm_config_dir: "{{ xdg_config_home }}/leftwm"
 leftwm_git_dir: "{{ xdg_data_home }}leftwm"
 leftwm_theme_git: https://github.com/b4skyx/leftwm-soothe.git
 leftwm_theme_git_dir: "{{ xdg_data_home }}/leftwm-soothe"
+
+wallpaper_url: https://f002.backblazeb2.com/file/adrianordonez-dotfiles/background.jpg

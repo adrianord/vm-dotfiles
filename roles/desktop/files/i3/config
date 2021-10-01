@@ -190,5 +190,5 @@ gaps inner 15
 
 exec_always alttab
 
-exec_always feh --bg-scale ~/.local/share/leftwm-soothe/theme/background.jpg
+exec_always feh --bg-scale ~/.local/share/wallpapers/background.jpg
 

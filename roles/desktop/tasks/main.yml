@@ -14,3 +14,14 @@
 
 #- include: picom_install.yml
 - include: alttab_install.yml
+
+- name: Ensure wallpaper folder exists
+  ansible.builtin.file:
+    path: "{{ xdg_data_home }}/wallpapers/"
+    state: directory
+
+- name: Download wallpaper
+  ansible.builtin.get_url:
+    url: "{{ wallpaper_url }}"
+    dest: "{{ xdg_data_home }}/wallpapers/"
+  
