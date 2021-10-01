@@ -1,0 +1,5 @@
+---
+roles:
+  - hurricanehrndz.rustup
+  - gantsign.visual-studio-code
+

@@ -1,0 +1,19 @@
+- name: LeftWM | Ensure directories exist
+  ansible.builtin.file:
+    path: "{{ leftwm_config_dir }}/{{ item }}"
+    state: directory
+  with_items:
+    - themes
+
+- name: LeftWM | Install LeftWM
+  include: leftwm_install.yml
+
+- name: LeftWM | Install LeftWM Theme
+  include: leftwm_install_theme.yml
+
+- name: LeftWM | Symlink config file
+  file:
+    src: "{{ role_path }}/files/config.toml"
+    dest: "{{ leftwm_config_dir }}/config.toml"
+    state: link
+    force: true

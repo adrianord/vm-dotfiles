@@ -1,0 +1,23 @@
+- name: LeftWM | Theme | Install dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    update_cache: true
+  become: true
+  with_items:
+    - polybar
+
+- name: LeftWM | Theme | Clone repository
+  ansible.builtin.git:
+    repo: "{{ leftwm_theme_git }}"
+    dest: "{{ leftwm_theme_git_dir }}"
+
+- name: LeftWM | Theme | Copy fonts
+  ansible.builtin.copy:
+    src: "{{ leftwm_theme_git_dir }}/.fonts/"
+    dest: "{{ xdg_data_home }}/fonts/"
+
+- name: LeftWM | Theme | Create symlink
+  ansible.builtin.file:
+    src: "{{ leftwm_theme_git_dir }}/theme"
+    dest: "{{ leftwm_config_dir }}/themes/current"
+    state: link

@@ -1,0 +1,35 @@
+- name: LeftWM | Install | Install dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    update_cache: true
+  become: true
+  with_items:
+    - xorg
+
+- name: LeftWM | Install | Clone repository
+  ansible.builtin.git:
+    repo: https://github.com/leftwm/leftwm.git
+    dest: "{{ leftwm_git_dir }}"
+
+- name: LeftWM | Install | Build LeftWM
+  ansible.builtin.shell:
+    cmd: cargo build --release
+    chdir: "{{ leftwm_git_dir }}"
+
+- name: LeftWM | Install | Create symlinks
+  ansible.builtin.file:
+    src: "{{ leftwm_git_dir }}/target/release/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.local/bin/{{ item }}"
+    state: link
+  with_items:
+    - leftwm
+    - leftwm-worker
+    - leftwm-state
+    - leftwm-check
+    - leftwm-command
+
+- name: LeftWM | Install | Copy leftwm.desktop
+  ansible.builtin.copy:
+    src: "{{ leftwm_git_dir }}/leftwm.desktop"
+    dest: /usr/share/xsessions/leftwm.desktop
+  become: true

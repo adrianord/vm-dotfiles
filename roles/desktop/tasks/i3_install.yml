@@ -1,0 +1,13 @@
+- name: i3 | Install
+  ansible.builtin.apt:
+    name: i3-gaps
+    update_cache: true
+  become: true
+
+- name: i3 | Symlink config file
+  file:
+    src: "{{ role_path }}/files/i3/config"
+    dest: "{{ xdg_config_home }}/i3/config"
+    state: link
+    force: true
+  

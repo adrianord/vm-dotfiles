@@ -1,0 +1,44 @@
+- name: Set up development virtual machine
+  hosts: local
+  vars:
+    user: aordonez
+  tasks:
+    - name: Ensure XDG Base Directory defaults
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/{{ item }}"
+        state: directory
+      with_items:
+        - .config
+        - .cache
+        - .local/share
+        - .local/state
+        - .local/bin
+      tags:
+        - xdg
+    - include_role:
+        name: gantsign.visual-studio-code
+        apply:
+          tags:
+            - vscode
+      tags:
+        - always
+    - include_role:
+        name: hurricanehrndz.rustup
+        apply:
+          tags:
+            - rust
+      vars:
+        rustup_cargo_crates:
+          - ripgrep
+          - fd-find
+          - git-delta
+          - bat
+      tags:
+        - always
+    - include_role:
+        name: desktop
+        apply:
+          tags:
+            - desktop
+      tags:
+        - always

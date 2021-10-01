@@ -1,0 +1,16 @@
+#- include: leftwm.yml
+
+- include: i3_install.yml
+
+- name: Install desktop components
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    update_cache: true
+  become: true
+  with_items:
+    - rofi
+    - open-vm-tools
+    - feh
+
+#- include: picom_install.yml
+- include: alttab_install.yml

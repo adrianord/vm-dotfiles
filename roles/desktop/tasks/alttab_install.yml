@@ -1,0 +1,21 @@
+- name: AltTab | Install | Install dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    update_cache: true
+  become: true
+  with_items:
+    - libxft-dev
+    - libxpm-dev
+    - libxrandr-dev
+    - automake
+
+- name: AltTab | Install | Clone repository
+  ansible.builtin.git:
+    repo: https://github.com/sagb/alttab.git
+    dest: "{{ xdg_data_home }}/alttab"
+
+- name: AltTab | Install
+  ansible.builtin.shell:
+    cmd: ./configure && make install
+    chdir: "{{ xdg_data_home }}/alttab"
+  become: true
