@@ -8,6 +8,7 @@
     - libxpm-dev
     - libxrandr-dev
     - automake
+    - uthash-dev
 
 - name: AltTab | Install | Clone repository
   ansible.builtin.git:
