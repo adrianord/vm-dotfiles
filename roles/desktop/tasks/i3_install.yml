@@ -10,6 +10,11 @@
     update_cache: true
   become: true
 
+- name: i3 | Ensure config path
+  file:
+    path: "{{ xdg_config_home }}/i3"
+    state: directory
+
 - name: i3 | Symlink config file
   file:
     src: "{{ role_path }}/files/i3/config"
