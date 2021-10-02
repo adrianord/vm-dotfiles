@@ -11,6 +11,8 @@
     - rofi
     - open-vm-tools
     - feh
+    - xdg-utils
+    - dbus-x11
 
 #- include: picom_install.yml
 - include: alttab_install.yml
