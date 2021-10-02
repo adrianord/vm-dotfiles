@@ -2,6 +2,7 @@
   ansible.builtin.apt_repository:
     repo: "ppa:regolith-linux/release"
     state: present
+  become: true
 
 - name: i3 | Install
   ansible.builtin.apt:
